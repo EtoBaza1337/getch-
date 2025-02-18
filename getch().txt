@@ -1,0 +1,61 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+const int MAP_SIZE = 30;
+
+void printMap(char map[MAP_SIZE][MAP_SIZE], int playerX, int playerY) {
+    system("cls");
+    for (int i = 0; i < MAP_SIZE; i++) {
+        for (int j = 0; j < MAP_SIZE; j++) {
+            if (i == playerY && j == playerX) {
+                cout << "# ";
+            }
+            else {
+                cout << ". ";
+            }
+        }
+        cout << endl;
+    }
+    cout << "Координаты игрока: " << playerX << "/" << playerY << endl;
+}
+
+int main() {
+    setlocale(LC_CTYPE, "russian");
+    char map[MAP_SIZE][MAP_SIZE];
+    int playerX = MAP_SIZE / 2;
+    int playerY = MAP_SIZE / 2;
+
+    for (int i = 0; i < MAP_SIZE; i++) {
+        for (int j = 0; j < MAP_SIZE; j++) {
+            map[i][j] = '.';
+        }
+    }
+
+    while (true) {
+        printMap(map, playerX, playerY);
+
+        char input = _getch();
+
+        switch (input) {
+        case 'w':
+            if (playerY > 0) playerY--;
+            break;
+        case 's':
+            if (playerY < MAP_SIZE - 1) playerY++;
+            break;
+        case 'a':
+            if (playerX > 0) playerX--;
+            break;
+        case 'd':
+            if (playerX < MAP_SIZE - 1) playerX++;
+            break;
+        case 'q':
+            return 0;
+        default:
+            break;
+        }
+    }
+
+    return 0;
+}
